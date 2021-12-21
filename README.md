@@ -14,7 +14,8 @@ Screenshot:
 
 ### Features
 
-- Random quote shown when "Show another quote" button clicked.
 - Random quote automatically shown every five seconds.
-- Quotes include citation, year, and tags.
-- Background color hue randomly changes each time the quote refreshes.
+- Random quote shown when "Show another quote" button clicked.
+- Time delay between quotes is automatically reset when button clicked.
+- Quotes optionally include source, citation, year, and tags if provided in the data.
+- Background hue color randomly changes each time the quote refreshes.
