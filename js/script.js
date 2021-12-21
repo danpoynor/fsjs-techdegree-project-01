@@ -76,6 +76,10 @@ const getRandomQuote = () => {
  * `randomColor` function
  *
  * Returns an HSL color with a random hue value between 0 to 360.
+ *
+ * Note I'm only updating the hue value here so background colors don't
+ * get overly vivid/grey (saturation) or too light/dark (lightness).
+ * This way the tone and contrast of each random color is consistent.
 ***/
 const randomColor = () => {
   const randomHue = Math.floor(Math.random() * 360);
