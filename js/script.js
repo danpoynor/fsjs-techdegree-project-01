@@ -96,7 +96,6 @@ const randomColor = () => {
  * Creates HTML string with quote and source.
  * Includes optional citation and year.
  * Inserts HTML string to `quote-box` div.
- *
 ***/
 const printQuote = () => {
   const quote = getRandomQuote();
@@ -112,10 +111,10 @@ const printQuote = () => {
   if (quote.year) {
     quoteString += `<span class="year">${quote.year}</span>`;
   }
-  quoteString += `</p>`;
+  quoteString += '</p>';
 
   if (quote.tags) {
-    const tagsCSV = quote.tags.join(", ")
+    const tagsCSV = quote.tags.join(', ')
     quoteString += `<p class="tags">Tags: ${tagsCSV}</p>`;
   }
 
@@ -123,11 +122,13 @@ const printQuote = () => {
   document.getElementById('quote-box').innerHTML = quoteString;
 }
 
-// Call `printQuote` function automatically every 5 seconds
+/***
+ * Call `printQuote` function automatically every 5 seconds
+***/
 setInterval(printQuote, 5000);
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById('load-quote').addEventListener('click', printQuote, false);
