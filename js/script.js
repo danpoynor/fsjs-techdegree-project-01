@@ -59,6 +59,9 @@ const quotes = [
     citation: 'The World as I See It',
     year: '1959',
     tags: ['life', 'unassuming']
+  },
+  {
+    quote: 'This is a test quote which doesn&rsquo;t include keys for source, citation, year, or tags.'
   }
 ];
 
@@ -100,16 +103,18 @@ const printQuote = () => {
 
   let quoteString = `<p class="quote">${quote.quote}</p>`;
 
-  quoteString += `<p class="source">${quote.source}`;
-  if (quote.citation.length > 0) {
+  if (quote.source) {
+    quoteString += `<p class="source">${quote.source}`;
+  }
+  if (quote.citation) {
     quoteString += `<span class="citation">${quote.citation}</span>`;
   }
-  if (quote.year.length > 0) {
+  if (quote.year) {
     quoteString += `<span class="year">${quote.year}</span>`;
   }
   quoteString += `</p>`;
 
-  if (quote.tags.length > 0) {
+  if (quote.tags) {
     const tagsCSV = quote.tags.join(", ")
     quoteString += `<p class="tags">Tags: ${tagsCSV}</p>`;
   }
