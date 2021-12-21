@@ -71,8 +71,7 @@ const quotes = [
  * Returns a random quote object from `quotes` array
 ***/
 const getRandomQuote = () => {
-  const randomNumber = Math.floor(Math.random() * quotes.length);
-  return quotes[randomNumber];
+  return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
 /***
@@ -85,8 +84,7 @@ const getRandomQuote = () => {
  * This way the tone and contrast of each random color is consistent.
 ***/
 const randomColor = () => {
-  const randomHue = Math.floor(Math.random() * 360);
-  return `hsl(${randomHue} 54% 39%)`;
+  return `hsl(${Math.floor(Math.random() * 360)} 54% 39%)`;
 }
 
 /***
@@ -114,8 +112,7 @@ const printQuote = () => {
   quoteString += '</p>';
 
   if (quote.tags) {
-    const tagsCSV = quote.tags.join(', ')
-    quoteString += `<p class="tags">Tags: ${tagsCSV}</p>`;
+    quoteString += `<p class="tags">Tags: ${quote.tags.join(', ')}</p>`;
   }
 
   document.body.style.backgroundColor = randomColor();
