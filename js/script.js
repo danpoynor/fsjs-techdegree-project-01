@@ -61,7 +61,7 @@ const quotes = [
     tags: ['life', 'unassuming']
   },
   {
-    quote: 'This is a test quote which doesn&rsquo;t include keys for source, citation, year, or tags.'
+    quote: 'This is a test quote which doesn&rsquo;t include values for source, citation, year, or tags.'
   }
 ];
 
@@ -79,8 +79,8 @@ const getRandomQuote = () => {
  *
  * Returns an HSL color with a random hue value between 0 to 360.
  *
- * Note I'm only updating the hue value here so background colors don't
- * get overly vivid/grey (saturation) or too light/dark (lightness).
+ * Note I'm only updating the hue value so colors don't get
+ * overly vivid/grey (saturation) or too light/dark (lightness).
  * This way the tone and contrast of each random color is consistent.
 ***/
 const randomColor = () => {
@@ -88,16 +88,13 @@ const randomColor = () => {
 }
 
 /***
- * `printQuote` function
+ * `constructQuote` function
  *
- * Calls `getRandomQuote` function.
- * Creates HTML string with quote and source.
- * Includes optional citation and year.
- * Inserts HTML string to `quote-box` div.
+ * Returns a string of HTML with values from `quote` object.
+ *
+ * Optionally includes source, citation, year, and tags values.
 ***/
-const printQuote = () => {
-  const quote = getRandomQuote();
-
+const constructQuote = (quote) => {
   let quoteString = `<p class="quote">${quote.quote}</p>`;
 
   if (quote.source) {
@@ -115,14 +112,63 @@ const printQuote = () => {
     quoteString += `<p class="tags">Tags: ${quote.tags.join(', ')}</p>`;
   }
 
-  document.body.style.backgroundColor = randomColor();
-  document.getElementById('quote-box').innerHTML = quoteString;
+  return quoteString;
 }
 
 /***
- * Call `printQuote` function automatically every 5 seconds
+ * `showRandomQuote` function
+ *
+ * Constructs HTML with values from `getRandomQuote` object.
+ * Inserts HTML into the `#quote-box` div.
+ * Update background to a random hue color.
+ *
+ * Called from:
+ * - File load
+ * - `printQuote` button click
 ***/
-setInterval(printQuote, 5000);
+const showRandomQuote = () => {
+  document.getElementById('quote-box').innerHTML = constructQuote(getRandomQuote());
+  document.body.style.backgroundColor = randomColor();
+}
+
+/***
+ * `timer` object
+ *
+ * Used to control when the `showRandomQuote` function is called.
+ *
+ * A `window.quoteTimer` global variable is used to store the timer object.
+ * This allows the timer to be `reset` when the `#load-quote` button is clicked.
+ * Note: When `start()` or `reset()` are called, an interval value can be passed in.
+ * Note: Interval value is in milliseconds.
+***/
+const timer = {
+  defaultInterval: 5000,
+  start(interval = this.defaultInterval) {
+    window.quoteTimer = setInterval(showRandomQuote, interval);
+  },
+  stop() {
+    clearInterval(window.quoteTimer);
+  },
+  reset(interval = this.defaultInterval) {
+    this.stop();
+    this.start(interval);
+  }
+}
+
+/***
+ * `printQuote` function
+ *
+ * This function is called when the `#load-quote` button is clicked.
+***/
+const printQuote = () => {
+  showRandomQuote();
+  timer.reset();
+}
+
+/***
+ * Start a timer that shows a random quote when this script loads
+***/
+timer.start();
 
 /***
  * click event listener for the print quote button
