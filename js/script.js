@@ -61,7 +61,7 @@ const quotes = [
     tags: ['life', 'unassuming']
   },
   {
-    quote: 'This is a test quote which doesn&rsquo;t include values for source, citation, year, or tags.'
+    quote: 'This is a test quote which doesn&rsquo;t include keys for source, citation, year, or tags.'
   }
 ];
 
